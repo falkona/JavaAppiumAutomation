@@ -45,6 +45,18 @@ public class WikipediaTests {
                 "Wikipedia'");
     }
 
+    @Test
+    public void cancelSearchTest() {
+        WebElement searchMainPage = waitForElementPresent(By.xpath("//*[contains(@text, 'Search Wikipedia')]"));
+        searchMainPage.click();
+        WebElement search = waitForElementPresent(By.id("search_src_text"));
+        search.sendKeys("Harry Potter");
+        WebElement searchResult = waitForElementPresent(By.id("search_results_list"));
+        WebElement searchCloseButton = waitForElementPresent(By.id("search_close_btn"));
+        searchCloseButton.click();
+        WebElement searchEmptyContainer = waitForElementPresent(By.id("search_empty_container"));
+    }
+
     private void assertElementHasText(By by, String expectedValue, String errorMessage) {
         WebElement element = waitForElementPresent(by);
         assertEquals(expectedValue, element.getText(), errorMessage);
