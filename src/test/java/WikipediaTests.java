@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WikipediaTests {
 
@@ -89,7 +90,15 @@ public class WikipediaTests {
         searchResultList = driver.findElements(By.id("page_list_item_title"));
         WebElement article = (WebElement) searchResultList.get(0);
         swipeLeft(article, "Не удалось выполнить свайп влево", 300);
+    }
 
+    @Test
+    public void titleIsPresentTest() {
+        waitForElementPresentAndClick(searchFieldMainPageBy);
+        waitForElementPresentAndSendKeys(searchFieldBy, searchLine);
+        waitForElementPresentAndClick(By.id("page_list_item_title"));
+        WebElement title = driver.findElement(By.id("title"));
+        assertTrue(title.isDisplayed(), "Заголовок статьи не обнаружен");
     }
 
     private void assertElementHasText(By by, String expectedValue, String errorMessage) {
