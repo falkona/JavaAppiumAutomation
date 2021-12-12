@@ -12,7 +12,6 @@ public class ArticlesTests extends CoreTestCase {
     private String searchLine = "Harry Potter";
 
     @BeforeEach
-    @Override
     public void setUp() throws Exception {
         super.setUp();
 
@@ -21,7 +20,6 @@ public class ArticlesTests extends CoreTestCase {
     }
 
     @AfterEach
-    @Override
     public void tearDown() {
         super.tearDown();
     }

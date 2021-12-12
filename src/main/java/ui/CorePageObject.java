@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ui.locator.Locator;
 
 import java.time.Duration;
 
@@ -22,30 +23,31 @@ public abstract class CorePageObject {
         this.driver = driver;
     }
 
-    protected void assertElementHasText(By by, String expectedValue, String errorMessage) {
-        WebElement element = waitForElementPresent(by);
+    protected void assertElementHasText(Locator locator, String expectedValue, String errorMessage) {
+        WebElement element = waitForElementPresent(locator);
         assertEquals(expectedValue, element.getText(), errorMessage);
     }
 
-    protected WebElement waitForElementPresent(By by) {
+    protected WebElement waitForElementPresent(Locator locator) {
+        By by = getByFromLocator(locator);
         WebDriverWait wait = new WebDriverWait(driver, DEFAULT_TIMEOUT_IN_SECONDS);
         wait.withMessage("Элемент не найден: " + by.toString());
 
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    protected void waitForElementPresentAndClick(By by) {
-        WebElement element = waitForElementPresent(by);
+    protected void waitForElementPresentAndClick(Locator locator) {
+        WebElement element = waitForElementPresent(locator);
         element.click();
     }
 
-    protected void waitForElementPresentAndSendKeys(By by, String keys) {
-        WebElement element = waitForElementPresent(by);
+    protected void waitForElementPresentAndSendKeys(Locator locator, String keys) {
+        WebElement element = waitForElementPresent(locator);
         element.sendKeys(keys);
     }
 
-    private void swipeLeft(By by, String errorMessage, int timeOfSwipe) {
-        WebElement element = waitForElementPresent(by);
+    private void swipeLeft(Locator locator, String errorMessage, int timeOfSwipe) {
+        WebElement element = waitForElementPresent(locator);
         swipeLeft(element, errorMessage, timeOfSwipe);
     }
 
@@ -62,5 +64,16 @@ public abstract class CorePageObject {
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(timeOfSwipe)))
                 .moveTo(PointOption.point(leftX, middleY))
                 .release().perform();
+    }
+
+    protected By getByFromLocator(Locator locator) {
+        String platform = System.getenv("PLATFORM");
+        By by = null;
+        if (platform.equals("Android")) {
+            by = locator.getAndroidBy().getBy();
+        } else if (platform.equals("iOS")) {
+            by = locator.getiOSBy().getBy();
+        }
+        return by;
     }
 }
