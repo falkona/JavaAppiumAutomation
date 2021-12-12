@@ -3,24 +3,28 @@ package ui;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import ui.locator.AndroidBy;
+import ui.locator.IOSBy;
+import ui.locator.Locator;
 
 import java.util.List;
 
 public class SearchPageObject  extends CorePageObject {
 
-    private final By SEARCH_FIELD_BY = By.id("search_src_text");
-    private final By SEARCH_RESULTS_LIST = By.id("search_results_list");
-    private final By SEARCH_CLOSE_BUTTON = By.id("search_close_btn");
-    private final By SEARCH_EMPTY_LIST = By.id("search_empty_container");
-    private final By ARTICLE_TITLE = By.id("page_list_item_title");
-    private final By QUIT_SEARCH_BUTTON = By.className("android.widget.ImageButton");
+    private final Locator SEARCH_FIELD = new Locator(new IOSBy(By.id("Search Wikipedia")), new AndroidBy(By.id("search_src_text")));
+    private final Locator SEARCH_RESULTS_LIST = new Locator(new AndroidBy(By.id("search_results_list")));
+    private final Locator SEARCH_CLOSE_BUTTON = new Locator(new IOSBy(By.xpath("//XCUIElementTypeButton[@name=\"Cancel\"]")),
+                                                            new AndroidBy(By.id("search_close_btn")));
+    private final Locator SEARCH_EMPTY_LIST = new Locator(new AndroidBy(By.id("search_empty_container")));
+    private final Locator ARTICLE_TITLE = new Locator(new AndroidBy(By.id("page_list_item_title")));
+    private final Locator QUIT_SEARCH_BUTTON = new Locator(new AndroidBy(By.className("android.widget.ImageButton")));
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
     }
 
     public void sendKeysToSearch(String keys) {
-        waitForElementPresentAndSendKeys(SEARCH_FIELD_BY, keys);
+        waitForElementPresentAndSendKeys(SEARCH_FIELD, keys);
     }
 
     public void assertSearchHasResults() {
@@ -40,7 +44,8 @@ public class SearchPageObject  extends CorePageObject {
         List searchResultList;
 
         waitForElementPresent(ARTICLE_TITLE);
-        searchResultList = driver.findElements(ARTICLE_TITLE);
+        By by = getByFromLocator(ARTICLE_TITLE);
+        searchResultList = driver.findElements(by);
         WebElement article = (WebElement) searchResultList.get(articleNumber);
         article.click();
 
