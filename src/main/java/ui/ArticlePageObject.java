@@ -1,6 +1,7 @@
 package ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import ui.locator.AndroidBy;
@@ -16,6 +17,7 @@ public class ArticlePageObject extends CorePageObject {
     private final Locator NAVIGATE_UP = new Locator(new IOSBy(By.id("Back")),
                                                     new AndroidBy(By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]")));
     private final Locator TITLE = new Locator(new AndroidBy(By.id("title")));
+    private String articleTitle;
 
     public ArticlePageObject(AppiumDriver driver) {
         super(driver);
@@ -23,7 +25,9 @@ public class ArticlePageObject extends CorePageObject {
 
     public void saveArticleToDefaultSavedList() {
         waitForElementPresentAndClick(ADD_BOOKMARK);
-        waitForElementPresent(FRAGMENT_PAGE_COORDINATOR);
+        if (driver instanceof AndroidDriver) {
+            waitForElementPresent(FRAGMENT_PAGE_COORDINATOR);
+        }
     }
 
     public void returnToPreviousPage() {
@@ -34,6 +38,14 @@ public class ArticlePageObject extends CorePageObject {
         By by = getByFromLocator(TITLE);
         WebElement title = driver.findElement(by);
         assertTrue(title.isDisplayed(), "Заголовок статьи не обнаружен");
+    }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
+    }
+
+    public String getArticleTitle() {
+        return articleTitle;
     }
 
 }

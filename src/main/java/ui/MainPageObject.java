@@ -32,7 +32,11 @@ public class MainPageObject extends CorePageObject {
 
     public SavedListsPageObject openSavedLists() {
         waitForElementPresentAndClick(SAVED_ITEMS);
-
         return new SavedListsPageObject(driver);
+    }
+
+    public SavedArticlesPageObject openSavedArticles() {
+        waitForElementPresentAndClick(SAVED_ITEMS);
+        return new SavedArticlesPageObject(driver);
     }
 }

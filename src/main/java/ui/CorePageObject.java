@@ -76,4 +76,12 @@ public abstract class CorePageObject {
         }
         return by;
     }
+
+    protected boolean waitForElementNotPresent(Locator locator) {
+        By by = getByFromLocator(locator);
+        WebDriverWait wait = new WebDriverWait(driver, DEFAULT_TIMEOUT_IN_SECONDS);
+        wait.withMessage("Элемент найден: " + by.toString());
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+    }
+
 }
