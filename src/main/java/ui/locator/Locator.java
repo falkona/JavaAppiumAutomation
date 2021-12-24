@@ -26,4 +26,8 @@ public class Locator {
         return androidBy;
     }
 
+    public void setiOSBy(IOSBy iOSBy) {
+        this.iOSBy = iOSBy;
+    }
+
 }

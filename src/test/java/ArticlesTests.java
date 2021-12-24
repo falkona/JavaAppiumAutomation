@@ -1,3 +1,5 @@
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,6 +9,9 @@ import ui.OnboardingPageObject;
 import ui.SavedArticlesPageObject;
 import ui.SavedListsPageObject;
 import ui.SearchPageObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArticlesTests extends CoreTestCase {
     private String searchLine = "Harry Potter";
@@ -26,19 +31,40 @@ public class ArticlesTests extends CoreTestCase {
 
     @Test
     public void saveTwoArticlesTest() {
-        MainPageObject mainPage = new MainPageObject(driver);
-        SearchPageObject searchPage = mainPage.initSearch();
-        searchPage.sendKeysToSearch(searchLine);
-        searchPage.assertSearchHasResults();
-        for (int i = 0; i < 2; i++) {
-            ArticlePageObject articlePage = searchPage.openArticleFromSearch(i);
-            articlePage.saveArticleToDefaultSavedList();
-            articlePage.returnToPreviousPage();
+        if (driver instanceof AndroidDriver) {
+            MainPageObject mainPage = new MainPageObject(driver);
+            SearchPageObject searchPage = mainPage.initSearch();
+            searchPage.sendKeysToSearch(searchLine);
+            searchPage.assertSearchHasResults();
+            for (int i = 0; i < 2; i++) {
+                ArticlePageObject articlePage = searchPage.openArticleFromSearch(i);
+                articlePage.saveArticleToDefaultSavedList();
+                articlePage.returnToPreviousPage();
+            }
+            searchPage.quitSearch();
+            SavedListsPageObject savedLists = mainPage.openSavedLists();
+            SavedArticlesPageObject savedArticlesPage = savedLists.openListOfSavedArticles();
+            savedArticlesPage.removeArticleFromList(0);
+        } else if (driver instanceof IOSDriver) {
+            MainPageObject mainPage = new MainPageObject(driver);
+            SearchPageObject searchPage = mainPage.initSearch();
+            searchPage.setIOSArticleTitle(searchLine);
+            searchPage.sendKeysToSearch(searchLine);
+            searchPage.assertSearchHasResults();
+            List<String> savedArticles = new ArrayList();
+            for (int i = 0; i < 2; i++) {
+                ArticlePageObject articlePage = searchPage.openArticleFromSearch(i);
+                articlePage.saveArticleToDefaultSavedList();
+                savedArticles.add(articlePage.getArticleTitle());
+                articlePage.returnToPreviousPage();
+            }
+            searchPage.quitSearch();
+            SavedArticlesPageObject savedArticlesPage = mainPage.openSavedArticles();
+            savedArticlesPage.skipSyncSavedArticles();
+            savedArticlesPage.removeArticleFromList(savedArticles.get(0));
+            savedArticles.remove(0);
+            savedArticlesPage.checkArticlesPresent(savedArticles);
         }
-        searchPage.quitSearch();
-        SavedListsPageObject savedLists = mainPage.openSavedLists();
-        SavedArticlesPageObject savedArticlesPage = savedLists.openListOfSavedArticles();
-        savedArticlesPage.removeArticleFromList(0);
     }
 
     @Test
