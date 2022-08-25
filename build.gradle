@@ -11,6 +11,8 @@ repositories {
 
 dependencies {
     implementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    implementation 'org.junit.platform:junit-platform-suite:1.8.2'
+    implementation 'junit:junit:4.13.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     testImplementation 'io.appium:java-client:7.6.0'
     implementation 'io.appium:java-client:7.6.0'

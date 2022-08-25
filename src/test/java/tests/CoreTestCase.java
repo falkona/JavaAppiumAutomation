@@ -1,3 +1,5 @@
+package tests;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -64,4 +66,5 @@ public abstract class CoreTestCase {
         }
         return platform;
     }
+
 }
