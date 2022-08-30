@@ -1,5 +1,6 @@
 package ui;
 
+import driver.DriverManager;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -19,8 +20,8 @@ public abstract class CorePageObject {
     protected AppiumDriver driver;
     private static final int DEFAULT_TIMEOUT_IN_SECONDS = 5;
 
-    protected CorePageObject(AppiumDriver driver) {
-        this.driver = driver;
+    protected CorePageObject() {
+        this.driver = DriverManager.getInstance().getDriver();
     }
 
     protected void assertElementHasText(MobileElement element, String expectedValue, String errorMessage) {
@@ -47,12 +48,6 @@ public abstract class CorePageObject {
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(timeOfSwipe)))
                 .moveTo(PointOption.point(leftX, middleY))
                 .release().perform();
-    }
-
-    protected boolean waitForElementNotPresent(By by) {
-        WebDriverWait wait = new WebDriverWait(driver, DEFAULT_TIMEOUT_IN_SECONDS);
-        wait.withMessage("Элемент найден: " + by.toString());
-        return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
 
 }
