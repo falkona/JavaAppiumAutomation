@@ -33,14 +33,14 @@ public abstract class CoreTestCase {
             capabilities.setCapability("platformVersion", "9.0");
             capabilities.setCapability("deviceName", "abm_design");
             capabilities.setCapability("automationName", "Appium");
-            capabilities.setCapability("appPackage", "org.wikipedia");
-            capabilities.setCapability("appActivity", ".main.MainActivity");
-            capabilities.setCapability("app", "/Users/darianos/Documents/JavaAppiumAutomation/application/wikipedia.apk");
+            capabilities.setCapability("appPackage", "com.vkontakte.android");
+            capabilities.setCapability("appActivity", ".MainActivity");
+            capabilities.setCapability("app", "/Users/darianos/Desktop/Сборки/vk.apk");
         } else if (platform.equals(IOS_PLATFORM)) {
             capabilities.setCapability("platformName", "iOS");
             capabilities.setCapability("platformVersion", "14.5");
             capabilities.setCapability("deviceName", "iPhone 8");
-            capabilities.setCapability("app", "/Users/darianos/Documents/JavaAppiumAutomation/application/Wikipedia.zip");
+            capabilities.setCapability("app", "");
             capabilities.setCapability("automationName", "XCUITest");
         } else {
             throw new Exception("Не найдены capabilities для платформы " + platform);
