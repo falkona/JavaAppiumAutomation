@@ -17,8 +17,9 @@ dependencies {
     testImplementation 'io.appium:java-client:7.6.0'
     implementation 'io.appium:java-client:7.6.0'
     implementation 'org.seleniumhq.selenium:selenium-server:3.141.59'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
 }
 
-test {
+    test {
     useJUnitPlatform()
 }
