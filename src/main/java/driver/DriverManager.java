@@ -9,7 +9,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
 
-@Getter
 public class DriverManager {
 
     private static DriverManager driverManagerInstance;
@@ -23,6 +22,10 @@ public class DriverManager {
             driverManagerInstance = new DriverManager();
         }
         return driverManagerInstance;
+    }
+
+    public AppiumDriver getDriver() {
+        return driver;
     }
 
     public DesiredCapabilities getCapabilitiesByPlatform(String platform) throws Exception {
