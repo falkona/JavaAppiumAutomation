@@ -12,7 +12,7 @@ npm install -g carthage
 ### appium inspector 
 https://github.com/appium/appium-inspector/releases - скачать и установить последний релиз
 ### Java
-Установить менеджер пакетов [SDKMAN](ttps://sdkman.io/install)
+Установить менеджер пакетов [SDKMAN](https://sdkman.io/install)
 
 Установить Java 11
 ```
