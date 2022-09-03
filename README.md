@@ -13,6 +13,7 @@ npm install -g carthage
 https://github.com/appium/appium-inspector/releases - скачать и установить последний релиз
 ### Java
 Скачать Java 11 [здесь](https://www.techspot.com/downloads/5553-java-jdk.html)
+
 Нажать кнопку Windows. Скачивание начнется автоматически
 
 ### Android Studio
