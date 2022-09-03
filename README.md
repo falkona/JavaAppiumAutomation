@@ -12,12 +12,9 @@ npm install -g carthage
 ### appium inspector 
 https://github.com/appium/appium-inspector/releases - скачать и установить последний релиз
 ### Java
-Установить менеджер пакетов [SDKMAN](https://sdkman.io/install)
+Скачать Java 11 [здесь](https://www.techspot.com/downloads/5553-java-jdk.html)
+Нажать кнопку Windows. Скачивание начнется автоматически
 
-Установить Java 11
-```
-sdk install java 11.0.16.1-zulu
-```
 ### Android Studio
 Скачать и установить по [инструкции](https://docs.google.com/document/d/1UoGpQ0zC8kqkbt30BrYJtJAgur51lENd2hzlMhOdffY/edit#heading=h.ycdj7v5ywjpl)
 
