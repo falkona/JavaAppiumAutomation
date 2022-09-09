@@ -36,6 +36,13 @@ public abstract class CorePageObject {
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
+    protected void waitForElementPresent(MobileElement mobileElement) {
+        WebDriverWait wait = new WebDriverWait(driver, DEFAULT_TIMEOUT_IN_SECONDS);
+        wait.withMessage("Элемент не найден: " + mobileElement.toString());
+
+        Waiting.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(mobileElement)), 5);
+    }
+
     protected void swipeLeft(MobileElement element, String errorMessage, int timeOfSwipe) {
         int leftX = element.getLocation().getX();
         int rightX = leftX + element.getSize().getWidth();
