@@ -21,6 +21,9 @@ https://github.com/appium/appium-inspector/releases - скачать и уста
 
 ### appium-doctor
 Запустить аппиум доктор, убедиться, что все галки зеленые
+    ```
+    appium-doctor
+    ```
 ![](img/appium-doctor.png)
 
 ## Запуск Appium inspector
