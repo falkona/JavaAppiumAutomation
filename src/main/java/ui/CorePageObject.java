@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -48,6 +49,12 @@ public abstract class CorePageObject {
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(timeOfSwipe)))
                 .moveTo(PointOption.point(leftX, middleY))
                 .release().perform();
+    }
+
+    public void confirmPageLoad(List<MobileElement> requiredElements) {
+        for (MobileElement element : requiredElements) {
+            waitForElementPresent(element);
+        }
     }
 
 }
