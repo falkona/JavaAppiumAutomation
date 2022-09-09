@@ -4,10 +4,12 @@ import driver.DriverManager;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Waiting;
@@ -24,6 +26,7 @@ public abstract class CorePageObject {
 
     protected CorePageObject() {
         this.driver = DriverManager.getInstance().getDriver();
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
     protected void assertElementHasText(MobileElement element, String expectedValue, String errorMessage) {
