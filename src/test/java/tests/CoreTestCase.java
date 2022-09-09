@@ -12,11 +12,15 @@ public abstract class CoreTestCase {
 
     protected AppiumDriver driver;
 
-    public void setUp() throws Exception {
+    public void setUp() {
         DriverManager driverManager = DriverManager.getInstance();
-        String platform = driverManager.getPlatform();
-        DesiredCapabilities capabilities = driverManager.getCapabilitiesByPlatform(platform);
-        driverManager.setDriverByPlatform(platform, capabilities);
+        try {
+            String platform = driverManager.getPlatform();
+            DesiredCapabilities capabilities = driverManager.getCapabilitiesByPlatform(platform);
+            driverManager.setDriverByPlatform(platform, capabilities);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void tearDown() {
