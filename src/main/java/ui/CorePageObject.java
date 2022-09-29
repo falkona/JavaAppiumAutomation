@@ -42,8 +42,7 @@ public abstract class CorePageObject {
 
     protected void waitForElementPresent(MobileElement mobileElement) {
         WebDriverWait wait = new WebDriverWait(driver, DEFAULT_TIMEOUT_IN_SECONDS);
-            wait.withMessage("Элемент не найден: " + mobileElement.toString());
-
+        wait.withMessage("Элемент не найден: " + mobileElement.toString());
         Waiting.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(mobileElement)), 5);
     }
 
