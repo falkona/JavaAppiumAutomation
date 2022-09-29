@@ -17,7 +17,7 @@ https://github.com/appium/appium-inspector/releases - скачать и уста
 Нажать кнопку Windows. Скачивание начнется автоматически
 
 ### Android Studio
-Скачать и установить по [инструкции](https://docs.google.com/document/d/1UoGpQ0zC8kqkbt30BrYJtJAgur51lENd2hzlMhOdffY/edit#heading=h.ycdj7v5ywjpl)
+Скачать и установить по инструкции [Windows](https://docs.google.com/document/d/1UoGpQ0zC8kqkbt30BrYJtJAgur51lENd2hzlMhOdffY/edit#heading=h.ycdj7v5ywjpl) или [MacOS](https://docs.google.com/document/d/1R9mT_TyFvZxz8vj1CXyFNR0btFJUDvHhETFkC3f8E6c/edit)
 
 ### appium-doctor
 Запустить аппиум доктор, убедиться, что все галки зеленые
