@@ -28,7 +28,7 @@ https://github.com/appium/appium-inspector/releases - скачать и уста
 
 ## Запуск Appium inspector
 1. Запустить эмулятор Android 9
-2. Установить приложение VK на эмулятор
+2. Установить [приложение VK](https://drive.google.com/file/d/1xe49xmniPTnxBRrePxEuscXpeZCsJVcr/view?usp=sharing) на эмулятор
 3. Запустить сервер
     ```
     appium -p 5566
