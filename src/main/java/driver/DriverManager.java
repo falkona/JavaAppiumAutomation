@@ -4,12 +4,10 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
-import lombok.Getter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
 
-@Getter
 public class DriverManager {
 
     private static DriverManager driverManagerInstance;
@@ -25,6 +23,10 @@ public class DriverManager {
         return driverManagerInstance;
     }
 
+    public AppiumDriver getDriver() {
+        return driver;
+    }
+
     public DesiredCapabilities getCapabilitiesByPlatform(String platform) throws Exception {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -36,7 +38,7 @@ public class DriverManager {
             capabilities.setCapability("automationName", "Appium");
             capabilities.setCapability("appPackage", "com.vkontakte.android");
             capabilities.setCapability("appActivity", ".MainActivity");
-            capabilities.setCapability("app", "/Users/darianos/Desktop/Сборки/vk.apk");
+            //capabilities.setCapability("app", "/Users/darianos/Desktop/Сборки/vk.apk");
         } else if (platform.equals(IOS_PLATFORM)) {
             capabilities.setCapability("platformName", "iOS");
             capabilities.setCapability("platformVersion", "14.5");
@@ -52,9 +54,9 @@ public class DriverManager {
 
     public void setDriverByPlatform(String platform, DesiredCapabilities capabilities) throws Exception {
         if (platform.equals(ANDROID_PLATFORM)) {
-            driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+            driver = new AndroidDriver(new URL("http://127.0.0.1:5566/wd/hub"), capabilities);
         } else if (platform.equals(IOS_PLATFORM)) {
-            driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+            driver = new IOSDriver(new URL("http://127.0.0.1:5566/wd/hub"), capabilities);
         } else {
             throw new Exception("Не найден драйвер для платформы " + platform);
         }
